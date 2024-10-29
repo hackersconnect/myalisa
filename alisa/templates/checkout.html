@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Flaticon Font -->
+    <link href="{% static 'css/flaticon.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'css/check-main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css'%}">
+    <script src="https://kit.fontawesome.com/78e9243358.js" crossorigin="anonymous"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+  rel="stylesheet">
+  
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+ <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+ <!--swiper css-->
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/swiper.css'%}">
+    <link rel="stylesheet" href="{% static 'css/swiper.min.css'%}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">   
+    <title>Alisa | home</title>
+</head>
+{%  block body%}
+<body>
+<!--Headers Section Start-->
+<div id="page" class="site">
+    <aside class="site-off desktop-hide">
+        <div class="off-canvas">
+            <div class="canvas-head">
+                <div class="logo"><a href="/"><span>Alisa</span><span>.com</span></a></div>
+                <a href="#" class="t-close flexcenter"><i class="fa fa-arrow-left"></i></a>
+            </div>
+            <div class="departments"></div>
+            <nav></nav>
+            <div class="thetop-nav"></div>
+        </div>
+    </aside>
+    <header>
+       <div class="header-top mobile-hide">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <div class="left">
+                    <ul class="flexitem main-links">
+                        <li><a href="">Blog</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">Wishlist</a></li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <ul class="flexitem main-links">
+                        {% if request.user.is_authenticated and not request.user.profile.is_set %}
+                            <li><a href="#" class="btn btn-warning">VerifyAccount</a></li>
+                        {% else %}
+                            <li><a href="#">FAQS</a></li>
+                        {% endif %}
+
+                    {% if request.user.is_authenticated %}
+                        <li><a href=""><i class="fa fa-user-circle"></i><span class="icon-small"><i class="fa fa-chevron-down"></i></span></a>
+                            <ul>
+                                {% if request.user.profile.is_set %}
+                                    <li><a href="#" class="current">profile</a></li>
+                                    <li><a href="">Orders</a></li>
+                                {% else%}
+                                    
+            
+                                {% endif %}
+                              
+                                <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                               
+                            </ul>
+                        </li>
+                       
+                    {% else %}
+                        <li><a href=""><i class="fa fa-user-circle"></i><span class="icon-small"><i class="fa fa-chevron-down"></i></span></a>
+                            <ul>
+                                <li class="current"><a href="{% url 'login_user'%}">Login</a></li>
+                                <li><a href="{% url 'add_customer' %}">SignUp</a></li>
+                            
+                            </ul>
+                        </li>
+                    {% endif %}
+                       
+                        <li><a href="">English <span class="icon-small"><i class="fa fa-chevron-down"></i></span></a>
+                            <ul>
+                                <li class="current"><a href="#">English</a></li>
+                                <li><a href="#">Chinese</a></li>
+                                <li><a href="#">French</a></li>
+                                <li><a href="#">Portugese</a></li>
+                                <li><a href="#">Spanish</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+       </div>
+       <!--header top-->
+       <div class="header-nav">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <a href="#" class="trigger desktop-hide"><span><i class="fa fa-bars"></i></span></a>
+                <div class="left flexitem">
+                    <div class="logo"><a href="/"><span>Alisa</span><span>.com</span></a></div>
+                    <nav class="mobile-hide">
+                        <ul class="flexitem second-links">
+                            <li><a href="#" class="nav-link active">Home</a></li>
+                            
+
+                            
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="right">
+                    <ul class="flexitem second-links">
+                        <li class="mobile-hide"><a href="#">
+                            <div class="icon-large"><i class="fa fa-heart"></i></div>
+                            <div class="fly-item"><span class="item-number">0</span></div>
+                        </a></li>
+
+                        <li><a href="{% url 'view_cart'%}" class="iscart"> 
+                            <div class="icon-large"><i class="fa fa-shopping-cart"></i></div>
+                            <div class="fly-item"><span class="item-number">{{ num }}</span></div>
+                            
+                        </a></li>
+                    </ul>
+                </div>
+           
+            </div>
+        </div>
+       </div>
+        <!--header top-->
+<section id="cart-total" class="container">
+    <div class="total col-lg-6 col-md-6 col-12 mb-4">
+        <div>
+            <div class="d-flex justify-content-between">
+                <h6>Cart</h6>
+                <p><i class="fa fa-shopping-cart">{{ num }}</i></p>
+            </div>
+            {% for item in cart_items %}
+                <div class="d-flex justify-content-between">
+                    <h6>{{ item.product_link.name }}</h6>
+                    <p>Ksh:{{ total_price }}</p>
+                </div>
+            {% endfor %}
+
+            <hr class="second-hr">
+
+            <div class="d-flex justify-content-between">
+                <h6>Total</h6>
+                <p>Ksh:{{ shipping }}</p>
+            </div>
+</section>
+
+    <section id="cart-destination" class="container mb-4">
+
+        
+
+        <h5>Payment</h5>
+        <form action="{% url 'checkout_cart'%}" class="form" method="POST">
+            <div class="input-boxes">
+
+                <div class="input-box">
+                    <label for="phone" class="form-label">Enter Your Prefered Phone Number:</label>
+                    <input type="tel" class="form-control" name="phone" placeholder="071234567" required="required">
+    
+                </div>
+    
+                <div class="input-box">
+                    <label for="county" class="form-label">Choose Your County:</label>
+                    <select name="county" id="count-select" required="required">
+                        <option value="County">-----------</i></option>
+                        {% for town in towns %}
+                            <option value="">{{ town }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+    
+                <div class="input-box">
+                    <label for="subCounty" class="form-label">Choose Pickup Point:</label>
+                     <select name="county" id="count-select" required="required">
+                        <option value="County">----------</option>
+                        {% for station in stations %}
+                            <option value="">{{ station }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+    
+                
+                
+                <button type="submit" class="btn btn-warning mt-3">SEND</button>
+            </div>
+        </form>
+
+
+    </section>
+
+   
+
+<!--Footer-->
+    <footer>
+        <div class="newsletter">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="box">
+                        <div class="content">
+                            <h3>Subscribe To Our NewsLetter</h3>
+                            <p>Get E-mail Updates on Discounts and <strong>Special Offers</strong></p>
+                        </div>
+                        <form action="" class="search">
+                            <span class="icon-large"><i class="fa fa-envelope"></i></span>
+                            <input type="email" name="email" placeholder="Your E-mail" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Newsletter-->
+    
+        <div class="widgets">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="flexwrap">
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Help & Contact</h4>
+                                <ul class="flexcol">
+                                    <li><a href="#">Account</a></li>
+                                    <li><a href="">Bookings</a></li>
+                                    <li><a href="">Assistance</a></li>
+                                    <li><a href="">About</a></li>
+                                    <li><a href="">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Our Units</h4>
+                                <ul class="flexcol">
+                                    <li><a href="">StudioApartment</a></li>
+                                    <li><a href="">SuperiorStudio</a></li>
+                                    <li><a href="">Convertable</a></li>
+                                    <li><a href="">1Bedroom</a></li>
+                                    <li><a href="">StudioDeluxe</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>Payments</h4>
+                                <ul class="flexcol">
+                                    <li><a href="">Mpesa</a></li>
+                                    <li><a href="">Cash</a></li>
+                                    <li><a href="">MyBnB Points</a></li>
+                                    <li><a href="">Paypal</a></li>
+                                    <li><a href="">Mastercard</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item mini-links">
+                                <h4>About Us </h4>
+                                <ul class="flexcol">
+                                    <li><a href="">Company Info</a></li>
+                                    <li><a href="">News</a></li>
+                                    <li><a href="">Team</a></li>
+                                    <li><a href="">Policies</a></li>
+                                    <li><a href="">Reviews</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Widgets-->
+    
+        <div class="footer-info">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="flexcol">
+                        <div class="logo">
+                            <a href=""><span class="circle">Alisa <span>.com</span></span></a>
+                        </div>
+                        <div class="socials">
+                            <ul class="flexitem">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                                <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                                <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href=""><i class="fa fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="mini-text">Copyright@2024 <span>Alisa<span>.com</span>  All rights reserved</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+<script src="{% static 'js/owl.carousel.min.js'%}"></script>
+
+<!-- Contact Javascript File -->
+
+<!-- Template Javascript -->
+<script src="{% static 'js/bootstrap.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/check-out.js'%}"></script>
+</body>
+
+{% endblock %}
+</html>

@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Flaticon Font -->
+    <link href="{% static 'css/flaticon.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">
+    <script src="https://kit.fontawesome.com/78e9243358.js" crossorigin="anonymous"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+  rel="stylesheet">
+  
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+ <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+ <!--swiper css-->
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/swiper.css'%}">
+    <link rel="stylesheet" href="{% static 'css/swiper.min.css'%}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">   
+    <title>Alisa | home</title>
+</head>
+{%  block body%}
+<body>
+    {% if request.user.is_authenticated and request.user.is_staff and not request.user.profile.is_set%}
+        <div class="alert alert-warning" role="alert">
+            <a href="#" class="text-center"><h5>Please Verify Your Account!</h5></a>
+        </div>
+    {% elif request.user.is_authenticated and not request.user.is_staff and not request.user.profile.is_set %}
+        <div class="alert alert-warning" role="alert">
+            <a href="#" class="text-center"><h5>Please Verify Your Account!</h5></a>
+        </div>
+    {% else%}
+        
+    {% endif %}
+<!--Headers Section Start-->
+<div id="page" class="site">
+    <aside class="site-off desktop-hide">
+        <div class="off-canvas">
+            <div class="canvas-head">
+                <div class="logo"><a href="/"><span>Alisa</span><span>.com</span></a></div>
+                <a href="#" class="t-close flexcenter"><i class="fa fa-arrow-left"></i></a>
+            </div>
+            <div class="departments"></div>
+            <nav></nav>
+            <div class="thetop-nav"></div>
+        </div>
+    </aside>
+    <header>
+       <div class="header-top mobile-hide">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <div class="left">
+                    <ul class="flexitem main-links">
+                        <li><a href="">Blog</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">Wishlist</a></li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <ul class="flexitem main-links">
+                        {% if request.user.is_authenticated and not request.user.profile.is_set %}
+                            <li><a href="#" class="btn btn-warning">VerifyAccount</a></li>
+                        {% else %}
+                            <li><a href="#">FAQS</a></li>
+                        {% endif %}
+
+                    {% if request.user.is_authenticated %}
+                        <li><a href=""><i class="fa fa-user-circle"></i><span class="icon-small"><i class="fa fa-chevron-down"></i></span></a>
+                            <ul>
+                                {% if request.user.profile.is_set %}
+                                    <li><a href="#" class="current">profile</a></li>
+                                    <li><a href="">Orders</a></li>
+                                {% else%}
+                                    
+            
+                                {% endif %}
+                              
+                                <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                               
+                            </ul>
+                        </li>
+                       
+                    {% else %}
+                        <li><a href=""><i class="fa fa-user-circle"></i><span class="icon-small"><i class="fa fa-chevron-down"></i></span></a>
+                            <ul>
+                                <li class="current"><a href="{% url 'login_user'%}">Login</a></li>
+                                <li><a href="{% url 'add_customer' %}">SignUp</a></li>
+                            
+                            </ul>
+                        </li>
+                    {% endif %}
+                       
+                        <li><a href="">English <span class="icon-small"><i class="fa fa-chevron-down"></i></span></a>
+                            <ul>
+                                <li class="current"><a href="#">English</a></li>
+                                <li><a href="#">Chinese</a></li>
+                                <li><a href="#">French</a></li>
+                                <li><a href="#">Portugese</a></li>
+                                <li><a href="#">Spanish</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+       </div>
+       <!--header top-->
+       <div class="header-nav">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <a href="#" class="trigger desktop-hide"><span><i class="fa fa-bars"></i></span></a>
+                <div class="left flexitem">
+                    <div class="logo"><a href="/"><span>Alisa</span><span>.com</span></a></div>
+                    <nav class="mobile-hide">
+                        <ul class="flexitem second-links">
+                            <li><a href="#" class="nav-link active">Home</a></li>
+                            
+                            <li class="has-child"><a href="#">Fashion
+                                <div class="icon-small">
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
+                            </a>
+
+                                <div class="mega">
+                                    <div class="container">
+                                        <div class="wrapper">
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Women</h4>
+                                                    <ul class="units">
+                                                        <li><a href="#">Dresses</a></li>
+                                                        <li><a href="#">Skirts</a></li>
+                                                        <li><a href="#">Trousers</a></li>
+                                                        <li><a href="#">Jumpsuits</a></li>
+                                                        <li><a href="#">Shorts</a></li>
+                                                        <li><a href="#">Shoes</a></li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Girls</h4>
+                                                    <ul class="units">
+                                                        <li><a href="#">Dresses</a></li>
+                                                        <li><a href="#">Skirts</a></li>
+                                                        <li><a href="#">Trousers</a></li>
+                                                        <li><a href="#">Jumpsuits</a></li>
+                                                        <li><a href="#">Shorts</a></li>
+                                                        <li><a href="#">Shoes</a></li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Men</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Shirts</a></li>
+                                                        <li><a href="#">T-Shirts</a></li>
+                                                        <li><a href="#">Jackets</a></li>
+                                                        <li><a href="#">Trousers</a></li>
+                                                        <li><a href="#">Shorts</a></li>
+                                                        <li><a href="#">Shoes</a></li>
+                                                        <li><a href="#">Underwares</a></li>
+                                                        
+                                                        
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Sports</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">SportShoes</a></li>
+                                                        <li><a href="#">Tracksuits</a></li>
+                                                        <li><a href="#">Jerseys</a></li>
+                                                        <li><a href="#">Socks</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Kids</h4>
+                                                    <ul class="apartments">
+                                                        <li><a href="#">BabyKnapkins</a></li>
+                                                        <li><a href="#"></a></li>
+                                                        <li><a href="#">TsavoFedha</a></li>
+                                                        <li><a href="#">TsavoKiambu</a></li>
+                                                        <li><a href="#">TsavoSentinel</a></li>
+                                                        <li><a href="#">TsavoSunset</a></li>
+                                                        <li><a href="#">TsavoRongai</a></li>
+                                                        <li><a href="#">Woodvilee</a></li>
+                                                        <li><a href="#">90degrees</a></li>
+                                                        <li><a href="#">Thindigua</a></li>
+                                                    </ul>
+                                                    <a href="#" class="view-all">View all units<i class="fa fa-arrow-right"></i></a>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="has-child"><a href="#">Phones&Laptops
+                                <div class="icon-small">
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
+                            </a>
+
+                                <div class="mega">
+                                    <div class="container">
+                                        <div class="wrapper">
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Hp</h4>
+                                                    <ul class="units">
+                                                        <li><a href="#">Hp ELite Book</a></li>
+                                                        <li><a href="#">HP Specture</a></li>
+                                                        <li><a href="#">HP Envy</a></li>
+                                                        <li><a href="#">HP Probook</a></li>
+                                                        <li><a href="#">HP Pavilion</a></li>
+                                                        <li><a href="#">HP 348</a></li>
+                                                        <li><a href="#">HP 250</a></li>
+                                                        <li><a href="#">HP 6460b</a></li>
+                                                        <li><a href="#">HP ChromeBook</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Lenovo</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Lenovo ThinkPad</a></li>
+                                                        <li><a href="#">Lenovo x270/a></li>
+                                                        <li><a href="#">Lenovo Ideapad</a></li>
+                                                        <li><a href="#">Lenovo T460s</a></li>
+                                                        <li><a href="#">Lenovo ThinkPad Yoga</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Apple</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Cooking&Cuttlery</a></li>
+                                                        <li><a href="#">Electronics</a></li>
+                                                        <li><a href="#">Internet</a></li>
+                                                        <li><a href="#">Bathing&Beauty</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>DELL</h4>
+                                                    <ul class="apartments">
+                                                        <li><a href="#">DELL Latitude</a></li>
+                                                        <li><a href="#">DELL XPS</a></li>
+                                                        <li><a href="#">DELL ChromeBook</a></li>
+                                                        
+                                                    </ul>
+                                                    <a href="#" class="view-all">View all units<i class="fa fa-arrow-right"></i></a>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Phones</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Techno</a></li>
+                                                        <li><a href="#">Infinix</a></li>
+                                                        <li><a href="#">Samsung</a></li>
+                                                        <li><a href="#">Nokia</a></li>
+                                                        <li><a href="#">Oppo</a></li>
+                                                        <li><a href="#">IOS</a></li>
+                                                        <li><a href="#">Itel</a></li>
+                                                        <li><a href="#">Xiaomi</a></li>
+                                                        
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="has-child"><a href="#">Electronics
+                                <div class="icon-small">
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
+                            </a>
+
+                                <div class="mega">
+                                    <div class="container">
+                                        <div class="wrapper">
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>TVs</h4>
+                                                    <ul class="units">
+                                                        <li><a href="#"></a></li>
+                                                        <li><a href="#">Deluxe</a></li>
+                                                        <li><a href="#">SuperiorStudio</a></li>
+                                                        <li><a href="#">Convertables</a></li>
+                                                        <li><a href="#">1Bedroom</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Radio&Woofers</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Cooking&Cuttlery</a></li>
+                                                        <li><a href="#">Electronics</a></li>
+                                                        <li><a href="#">Internet</a></li>
+                                                        <li><a href="#">Bathing&Beauty</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Fridge&Freezers</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Cooking&Cuttlery</a></li>
+                                                        <li><a href="#">Electronics</a></li>
+                                                        <li><a href="#">Internet</a></li>
+                                                        <li><a href="#">Bathing&Beauty</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Washing Machines</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Cooking&Cuttlery</a></li>
+                                                        <li><a href="#">Electronics</a></li>
+                                                        <li><a href="#">Internet</a></li>
+                                                        <li><a href="#">Bathing&Beauty</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Microwaves</h4>
+                                                    <ul class="apartments">
+                                                        <li><a href="#">SuperBoma</a></li>
+                                                        <li><a href="#">TsavoStudio</a></li>
+                                                        <li><a href="#">TsavoFedha</a></li>
+                                                        <li><a href="#">TsavoKiambu</a></li>
+                                                        <li><a href="#">TsavoSentinel</a></li>
+                                                        <li><a href="#">TsavoSunset</a></li>
+                                                        <li><a href="#">TsavoRongai</a></li>
+                                                        <li><a href="#">Woodvilee</a></li>
+                                                        <li><a href="#">90degrees</a></li>
+                                                        <li><a href="#">Thindigua</a></li>
+                                                    </ul>
+                                                    <a href="#" class="view-all">View all units<i class="fa fa-arrow-right"></i></a>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                           
+                            </li>
+                            <li class="has-child"><a href="#">Home&Kitchen
+                                <div class="icon-small">
+                                    <i class="fa fa-chevron-down"></i>
+                                </div>
+                            </a>
+
+                                <div class="mega">
+                                    <div class="container">
+                                        <div class="wrapper">
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Women</h4>
+                                                    <ul class="units">
+                                                        <li><a href="#"></a></li>
+                                                        <li><a href="#">Deluxe</a></li>
+                                                        <li><a href="#">SuperiorStudio</a></li>
+                                                        <li><a href="#">Convertables</a></li>
+                                                        <li><a href="#">1Bedroom</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Men</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Cooking&Cuttlery</a></li>
+                                                        <li><a href="#">Electronics</a></li>
+                                                        <li><a href="#">Internet</a></li>
+                                                        <li><a href="#">Bathing&Beauty</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Sports</h4>
+                                                    <ul class="ratings">
+                                                        <li><a href="#">Cooking&Cuttlery</a></li>
+                                                        <li><a href="#">Electronics</a></li>
+                                                        <li><a href="#">Internet</a></li>
+                                                        <li><a href="#">Bathing&Beauty</a></li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="flexcol">
+                                                <div class="row">
+                                                    <h4>Kids</h4>
+                                                    <ul class="apartments">
+                                                        <li><a href="#">SuperBoma</a></li>
+                                                        <li><a href="#">TsavoStudio</a></li>
+                                                        <li><a href="#">TsavoFedha</a></li>
+                                                        <li><a href="#">TsavoKiambu</a></li>
+                                                        <li><a href="#">TsavoSentinel</a></li>
+                                                        <li><a href="#">TsavoSunset</a></li>
+                                                        <li><a href="#">TsavoRongai</a></li>
+                                                        <li><a href="#">Woodvilee</a></li>
+                                                        <li><a href="#">90degrees</a></li>
+                                                        <li><a href="#">Thindigua</a></li>
+                                                    </ul>
+                                                    <a href="#" class="view-all">View all units<i class="fa fa-arrow-right"></i></a>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+
+                            
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="right">
+                    <ul class="flexitem second-links">
+                        <li class="mobile-hide"><a href="#">
+                            <div class="icon-large"><i class="fa fa-heart"></i></div>
+                            <div class="fly-item"><span class="item-number">0</span></div>
+                        </a></li>
+
+                        <li><a href="{% url 'view_cart'%}" class="iscart"> 
+                            <div class="icon-large"><i class="fa fa-shopping-cart"></i></div>
+                        {% if request.user.is_authenticated %}
+                            <div class="fly-item"><span class="item-number">{{ num }}</span></div>
+                        {% else %}
+                            <div class="fly-item"><span class="item-number">0</span></div>
+                        {% endif %}
+                        </a></li>
+                    </ul>
+                </div>
+           
+            </div>
+        </div>
+       </div>
+        <!--header top-->
+       <div class="header-main mobile-hide">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <div class="left">
+                    
+                </div>
+                <div class="right">
+                    <div class="search-box">
+                        <form action="" class="search">
+                            <span class="icon-large"><i class="fa fa-search"></i></span>
+                            <input type="search" placeholder="Search products">
+                            <button type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </div>
+    </header>
+     <!--Header-->
+</div>
+<!--Headers Section End-->
+<main>
+    <div class="slider">
+        <div class="container">
+            <div class="wrapper">
+                <div class="myslider swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="image object-cover">
+                                    <img src="{% static 'images/center.gif'%}" alt="">
+
+                                </div>
+                                <div class="text-content flexcol">
+                                   
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="image object-cover">
+                                    <img src="{% static 'images/Banner_DB4.jpg'%}" alt="">
+
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="image object-cover">
+                                    <img src="{% static 'images/_DB3.jpg'%}" alt="">
+
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="image object-cover">
+                                    <img src="{% static 'images/_DB1.jpg'%}" alt="">
+
+                                </div>
+                               
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="image object-cover">
+                                    <img src="{% static 'images/_DB1-copy-3.jpg'%}" alt="">
+
+                                </div>
+                               
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="brands">
+        <div class="container">
+            <div class="wrapper flexitem">
+                <div class="item">
+                    <a href="#">
+                        <h6>TechWeeek</h6>
+                        <img src="{% static 'images/techweek.png'%}" alt="">
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <h6>Return Policy</h6>
+                        <img src="{% static 'images/return.png'%}" alt="">
+
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="#">
+                        <h6>Help</h6>
+                        <img src="{% static 'images/help.png'%}" alt="">
+                    </a>
+                </div>
+                <div class="item">
+                    <a href="#">
+                        <h6>Payments</h6>
+                        <img src="{% static 'images/payment.png'%}" alt="">
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="#">
+                        <h6>Delivery</h6>
+                        <img src="{% static 'images/FreeDelivery.png'%}" alt="">
+                    </a>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="trending">
+        <div class="container">
+            <div class="wrapper">
+                <div class="sectop"></div>
+                
+                <h2><span class="circle"><span>{{ category.name }}</span></span></h2>
+            </div>
+            <div class="row">
+                <div class="flexwrap">
+               
+                    {% for product in products %}
+                        <div class="col products mini">
+                            <div class="item">
+                                <div class="media">
+                                    <div class="thumbnail object-cover">
+                                        <a href="{% url 'detail_view' id=product.id %}"><img src="/media/{{ product.image }}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="hoverable">
+                                        <ul>
+                                            <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="discount circle flexcenter"><span>30%</span></div>
+                                </div>
+                                <div class="content">
+                                    <h3 class="main-links"><a href="{% url 'detail_view' id=product.id %}">{{ product.name }}</a></h3>
+                                    
+                                    
+                                    <div class="price">
+                                        <span class="currrent">Ksh:{{ product.current_price }}</span>
+                                        {% if product.previous_price > 0 %}
+                                            <span class="normal mini-text">Ksh:{{ product.previous_price }}</span>
+                                        {% else%}
+                                            <span class="normal mini-text"></span>
+                                        {% endif %}
+                                    </div>
+                                   
+                                    </div>
+                            </div>      
+                        </div>
+                    {% endfor %}
+           
+
+                   
+
+                    
+                   
+                        
+                </div>
+            </div>
+            
+                </div>
+            
+            </div>
+           
+        </div>
+            
+    </div>
+
+
+
+
+  
+        <div class="features">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="column">
+                        <div class="sectop flexitem">
+                            <h2><span class="circle">Featured BnBs</span></h2>
+                            <div class="second-links">
+                                <a href="#" class="view-all"><i class="fa fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="products main flexwrap">
+                           
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/air8.JPEG'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">1Bedroom Apartment TsavoStudios </a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:3500.00</span>
+                                            <span class="normal mini-text">Ksh:4000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">3</strong></span>
+                                                <span>Booked: <strong class="qty-sold">0</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:sereneBnBs</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    
+                                </div>
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/air3.jpg'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">Studio Apartment SuperBoma</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(10)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:1800.00</span>
+                                            <span class="normal mini-text">Ksh:2500.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">8</strong></span>
+                                                <span>Booked: <strong class="qty-sold">3</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:AshleyResidence</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                                
+                                </div>
+                            
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/view2.jpg'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">SuperiorStudio Classic Decors TsavoFedha</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:2500.00</span>
+                                            <span class="normal mini-text">Ksh:3000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">15</strong></span>
+                                                <span>Booked: <strong class="qty-sold">5</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:Ashley</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                        
+                                </div>
+
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/view2.jpg'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">SuperiorStudio Classic Decors TsavoFedha</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:2500.00</span>
+                                            <span class="normal mini-text">Ksh:3000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">15</strong></span>
+                                                <span>Booked: <strong class="qty-sold">5</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:Ashley</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                        
+                                </div>
+
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/air1.jpg'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">SuperiorStudio Classic Decors TsavoFedha</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:2500.00</span>
+                                            <span class="normal mini-text">Ksh:3000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">15</strong></span>
+                                                <span>Booked: <strong class="qty-sold">5</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:Ashley</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                        
+                                </div>
+
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/air2.jpg'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">SuperiorStudio Classic Decors TsavoFedha</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:2500.00</span>
+                                            <span class="normal mini-text">Ksh:3000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">15</strong></span>
+                                                <span>Booked: <strong class="qty-sold">5</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:Ashley</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                        
+                                </div>
+
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/air10.jpg'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">SuperiorStudio Classic Decors TsavoFedha</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:2500.00</span>
+                                            <span class="normal mini-text">Ksh:3000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">15</strong></span>
+                                                <span>Booked: <strong class="qty-sold">5</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:Ashley</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                        
+                                </div>
+
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/air9.jpg'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">SuperiorStudio Classic Decors TsavoFedha</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:2500.00</span>
+                                            <span class="normal mini-text">Ksh:3000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">15</strong></span>
+                                                <span>Booked: <strong class="qty-sold">5</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:Ashley</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                        
+                                </div>
+
+                                <div class="item">
+                                    <div class="media">
+                                        <div class="thumbnail object-cover">
+                                            <a href="#"><img src="{% static 'images/air11.JPEG'%}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="hoverable">
+                                            <ul>
+                                                <li class="active"><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shuffle-line"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="discount circle flexcenter"><span>20%</span></div>
+                                    </div>
+                                    <div class="content">
+                                        <h3 class="main-links"><a href="#">SuperiorStudio Classic Decors TsavoFedha</a></h3>
+                                        <div class="rating mb-2">
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <span class="mini-text">(30)</span>
+                            
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <span class="currrent">Ksh:2500.00</span>
+                                            <span class="normal mini-text">Ksh:3000.00</span>
+                                        </div>
+                                        <div class="stock mini-text">
+                                            <div class="qty">
+                                                <span>Available: <strong class="qty-available">15</strong></span>
+                                                <span>Booked: <strong class="qty-sold">5</strong></span>
+                                            </div>
+                                            <div class="bar">
+                                                <div class="available"></div>
+                                            </div>
+                                            <div class="brand mt-2">
+                                                <h6><span>By:Ashley</span></h6>
+                                            </div>
+                                        </div>
+                                        </div>
+                        
+                                </div>
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+</main>
+
+
+<footer>
+    <div class="newsletter">
+        <div class="container">
+            <div class="wrapper">
+                <div class="box">
+                    <div class="content">
+                        <h3>Subscribe To Our NewsLetter</h3>
+                        <p>Get E-mail Updates on Discounts and <strong>Special Offers</strong></p>
+                    </div>
+                    <form action="" class="search">
+                        <span class="icon-large"><i class="fa fa-envelope"></i></span>
+                        <input type="email" name="email" placeholder="Your E-mail" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Newsletter-->
+
+    <div class="widgets">
+        <div class="container">
+            <div class="wrapper">
+                <div class="flexwrap">
+                    <div class="row">
+                        <div class="item mini-links">
+                            <h4>Help & Contact</h4>
+                            <ul class="flexcol">
+                                <li><a href="#">Account</a></li>
+                                <li><a href="">Bookings</a></li>
+                                <li><a href="">Assistance</a></li>
+                                <li><a href="">About</a></li>
+                                <li><a href="">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item mini-links">
+                            <h4>Our Units</h4>
+                            <ul class="flexcol">
+                                <li><a href="">StudioApartment</a></li>
+                                <li><a href="">SuperiorStudio</a></li>
+                                <li><a href="">Convertable</a></li>
+                                <li><a href="">1Bedroom</a></li>
+                                <li><a href="">StudioDeluxe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item mini-links">
+                    
+                            <ul class="flexcol">
+                                <li><a href="">Mpesa</a></li>
+                                <li><a href="">Cash</a></li>
+                                <li><a href="">MyBnB Points</a></li>
+                                <li><a href="">Paypal</a></li>
+                                <li><a href="">Mastercard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item mini-links">
+                            <h4>About Us </h4>
+                            <ul class="flexcol">
+                                <li><a href="">Company Info</a></li>
+                                <li><a href="">News</a></li>
+                                <li><a href="">Team</a></li>
+                                <li><a href="">Policies</a></li>
+                                <li><a href="">Reviews</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Widgets-->
+
+    <div class="footer-info">
+        <div class="container">
+            <div class="wrapper">
+                <div class="flexcol">
+                    <div class="logo">
+                        <a href=""><span class="circle">Alisa <span>.com</span></span></a>
+                    </div>
+                    <div class="socials">
+                        <ul class="flexitem">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href=""><i class="fa fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mini-text">Copyright@2024 <span>Alisa<span>.com</span>  All rights reserved</span></p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--Footer-->
+
+<div class="menu-bottom desktop-hide">
+    <div class="container">
+        <div class="wrapper">
+            <nav>
+                <ul class="flexitem">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-angle-double-up"></i>
+                            <span>Trending</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user-circle"></i>
+                            <span>Account</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-heart"></i>
+                            <span>Wishlist</span>
+                            <div class="fly-item">
+                                <span class="item-number">0</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#0" class="t-search">
+                            <i class="fa fa-search"></i>
+                            <span>Search</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'view_cart'%}">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Trolley</span>
+                            <div class="fly-item">
+                                <span class="item-number">{{ num }}</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!--MenuBottom-->
+
+<!--Search-->
+<div class="search-bottom desktop-hide">
+    <div class="container">
+        <div class="wrapper">
+            <form action="" class="search">
+                <a href="#" class="search-close t-close flexcenter"><i class="fa fa-arrow-left"></i></a>
+                <span class="icon-large"><i class="fa fa-search"></i></span>
+                <input type="search" placeholder="Search">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="overlay"></div>
+<!-- Back to Top -->
+<a href="#" class="btn btn-secondary border back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+<script src="{% static 'js/owl.carousel.min.js'%}"></script>
+
+<!-- Contact Javascript File -->
+
+<!-- Template Javascript -->
+<script src="{% static 'js/bootstrap.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/index.js'%}"></script>
+
+<!--
+<script src="{% static 'js/home.js'%}"></script>
+-->
+
+
+</body>
+{% endblock %}
+</html>

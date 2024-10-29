@@ -1,0 +1,91 @@
+#cart-destination .container
+{
+
+    align-items: center;
+
+}
+#cart-destination .form
+{
+    width: 700px;
+    border: 2px solid orange;
+    padding: 15px;
+    color: #8d8c89;
+    justify-self: center;
+    margin-bottom: 15px;
+}
+#cart-destination .form button
+{
+    color: #fff;
+    background-color: orange;
+    width: 200px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+#cart-destination .form .input-box select
+{
+    width: 650px;
+    height: 40px;
+    background-color: #fff;
+    padding: 0 12px;
+    border-radius: 20px;
+    border: solid orange;
+}
+
+#cart-destination .form .input-box select option:hover
+{
+    background-color: orange;
+}
+
+#cart-destination .form .input-box
+{
+    margin-bottom: 10px;
+}
+#cart-destination .form input
+{
+    outline: none;
+    border: solid orange;
+    box-shadow: none;
+    border-radius: 15px;
+}
+#cart-destination h5
+{
+    background-color: orange;
+    width: 700px;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: #fff;
+    padding: 0 12px;
+}
+
+#cart-confirm .container
+{
+    margin-bottom: 150px;
+}
+#cart-confirm .card
+{
+    width: 700px;
+}
+
+
+@media screen and (max-width: 768px){
+    #cart-destination .form
+    {
+        width: 100%;
+    }
+    #cart-destination h5
+    {
+        width: 100%;
+    }
+
+    #cart-destination .form .input-box select
+    {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 368px){
+    #cart-destination .form .input-box select
+    {
+        width: 100%;
+    }
+}

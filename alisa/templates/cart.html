@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!-- Coding by CodingNepal | www.codingnepalweb.com-->
+<html lang="en" dir="ltr">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title> Alisa | view | cart </title>
+    <link rel="stylesheet" href="{% static 'css/cart.css'%}">
+    <link rel="stylesheet" href="{% static 'css/cart-main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <script src="https://kit.fontawesome.com/78e9243358.js" crossorigin="anonymous"></script> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+  rel="stylesheet">
+  
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+ <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+ <!--swiper css-->
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+{% block body %}
+<body>
+    <div class="overlay"></div>
+<!--Headers Section Start-->
+<div id="page" class="site">
+  <aside class="site-off desktop-hide">
+      <div class="off-canvas">
+          <div class="canvas-head">
+              <div class="logo"><a href="/"><span style="font-size: 1em;font-family: cursive;color: #fff;">Alisa</span><span style="font-family: cursive;">.com</span></a></div>
+              <a href="#" class="t-close flexcenter"><i class="fa fa-arrow-left"></i></a>
+          </div>
+          <div class="departments"></div>
+          <nav></nav>
+          <div class="thetop-nav"></div>
+      </div>
+  </aside>
+  <header>
+    
+     <!--header top-->
+     <div class="header-nav">
+      <div class="container-fluid">
+          <div class="wrapper flexitem">
+              <a href="#" class="trigger desktop-hide"><span><i class="fa fa-bars"></i></span></a>
+              <div class="left flexitem">
+                  <div class="logo"><a href="/"><span style="font-family: cursive;font-size: 1em;color: orange;">Alisa</span><span style="font-family: cursive;font-size: 1em;color: green;">.com</span></a></div>
+                  <nav class="mobile-hide">
+                      <ul class="flexitem second-links">
+                          <li><a href="{% url 'home'%}" class="nav-link active">Home</a></li>
+                          
+
+                      <li><a href="">Blog</a></li>
+                      <li><a href="">About</a></li>
+                      <li><a href="">Contact</a></li>
+                      <li><a href="">Wishlist</a></li>    
+                          
+                      </ul>
+                  </nav>
+              </div>
+              <div class="right">
+                  <ul class="flexitem second-links">
+                      
+
+                      
+                  </ul>
+              </div>
+         
+          </div>
+      </div>
+     </div>
+      <!--header top-->
+     
+  </header>
+   <!--Header-->
+</div>
+<main>
+    <section id="cart-title" class="pt-5 mt-2 container">
+        <h2 class="font-weight-bold pt-5">Shopping Cart</h2>
+        <hr>
+    </section>
+
+    <section id="cart-container" class="container my-5">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Remove</td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+
+                </tr>
+            </thead>
+
+            <tbody>
+        {% if not cart_items %}
+            <h1>Your Cart Is Empty Please Add Items</h1>
+        {% else %}
+            {% for item in cart_items %}
+                <tr>
+                    <td><a href="{% url 'remove_cart' item_id=item.id %}"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><img src="/media/{{ item.product_link.image }}" alt=""></td>
+                    <td> {{ item.product_link.name }}</td>
+                    <td><h4>Ksh: {{ item.product_link.current_price }}</h4></td>
+                    <td>{{ item.quantity }}</td>
+                    
+                </tr>
+            {% endfor %}
+        {% endif %}
+           
+        </table>
+    </section>
+
+    
+
+    <section id="cart-bottom">
+        <div class="row">
+            <div class="coupon col-lg-6 col-md-6 col-12 mb-4">
+                <div>
+                    <h5>Promo Code</h5>
+                    <p>Enter Promo-Code To Get 20% Off Total Price!</p>
+                <form action="{% url 'view_cart'%}" method="POST">
+                    {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    <input type="text" name="code" placeholder="promo code">
+                    <button type="submit" class="btn btn-dark">ApplyCode</button>
+                </form>
+                </div>
+            </div>
+
+
+            <div class="total col-lg-6 col-md-6 col-12 mb-4">
+                <div>
+                    <h5>Cart Total</h5>
+                    <div class="d-flex justify-content-between">
+                        <h6>Subtotal</h6>
+                        <p>Ksh:{{ total_price }}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <h6>Shipping</h6>
+                        <p>Ksh:300</p>
+                    </div>
+
+                    <hr class="second-hr">
+
+                    <div class="d-flex justify-content-between">
+                        <h6>Total</h6>
+                        <p>Ksh:{{ grand_total }}</p>
+                    </div>
+                    <a href="{% url 'final_check'%}" class="btn btn-warning ml-auto">PROCEED TO CHECKOUT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="newsletter">
+        <div class="container">
+            <div class="wrapper">
+                <div class="box">
+                    <div class="content">
+                        <h3>Subscribe To Our NewsLetter</h3>
+                        <p>Get E-mail Updates on Discounts and <strong>Special Offers</strong></p>
+                    </div>
+                    <form action="" class="search">
+                        <span class="icon-large"><i class="fa fa-envelope"></i></span>
+                        <input type="email" name="email" placeholder="Your E-mail" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Newsletter-->
+
+    <div class="widgets">
+        <div class="container">
+            <div class="wrapper">
+                <div class="flexwrap">
+                    <div class="row">
+                        <div class="item mini-links">
+                            <h4>Help & Contact</h4>
+                            <ul class="flexcol">
+                                <li><a href="#">Account</a></li>
+                                <li><a href="">Bookings</a></li>
+                                <li><a href="">Assistance</a></li>
+                                <li><a href="">About</a></li>
+                                <li><a href="">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item mini-links">
+                            <h4>Our Units</h4>
+                            <ul class="flexcol">
+                                <li><a href="">StudioApartment</a></li>
+                                <li><a href="">SuperiorStudio</a></li>
+                                <li><a href="">Convertable</a></li>
+                                <li><a href="">1Bedroom</a></li>
+                                <li><a href="">StudioDeluxe</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item mini-links">
+                            <h4>Payments</h4>
+                            <ul class="flexcol">
+                                <li><a href="">Mpesa</a></li>
+                                <li><a href="">Cash</a></li>
+                                <li><a href="">MyBnB Points</a></li>
+                                <li><a href="">Paypal</a></li>
+                                <li><a href="">Mastercard</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item mini-links">
+                            <h4>About Us </h4>
+                            <ul class="flexcol">
+                                <li><a href="">Company Info</a></li>
+                                <li><a href="">News</a></li>
+                                <li><a href="">Team</a></li>
+                                <li><a href="">Policies</a></li>
+                                <li><a href="">Reviews</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Widgets-->
+
+    <div class="footer-info">
+        <div class="container">
+            <div class="wrapper">
+                <div class="flexcol">
+                    <div class="logo">
+                        <a href=""><span class="circle">Alisa <span>.com</span></span></a>
+                    </div>
+                    <div class="socials">
+                        <ul class="flexitem">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                            <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href=""><i class="fa fa-youtube"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mini-text">Copyright@2024 <span>Alisa<span>.com</span>  All rights reserved</span></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  
+  <script src="{% static 'js/owl.carousel.min.js'%}"></script>
+  
+  <!-- Contact Javascript File -->
+  
+  <!-- Template Javascript -->
+  <script src="{% static 'js/bootstrap.js'%}"></script>
+  <script src="{% static 'js/bootstrap.min.js'%}"></script>
+  <script src="{% static 'js/login.js'%}"></script>
+</body>
+{% endblock %}
+</html>

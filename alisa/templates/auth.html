@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> MyBnB | finish-profile </title>
+  <link rel="stylesheet" href="{% static 'css/auths.css'%}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+  
+</head>
+{% block body %}
+<body>
+  <div class="container">
+    <!-- Title section -->
+    <div class="title">Setup Profile</div>
+    <div class="content">
+      <!-- Registration form -->
+      <form action="{% url 'investor_setup' id=request.user.id %}" method="POST">
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <div class="user-details">
+          <!-- Input for Full Name -->
+          <div class="input-box">
+            <span class="details">Brand Name:</span>
+            <input type="text" name="brand" placeholder="Enter your brand name" required>
+          </div>
+          <!-- Input for Username -->
+          <div class="input-box">
+            <span class="details">Age:</span>
+            <input type="number" name="age" placeholder="Enter your age" required>
+          </div>
+          <!-- Input for Email -->
+          <div class="input-box">
+            <span class="details">ID or Passport Number:</span>
+            <input type="number" name="idNumber" placeholder="Enter your ID or Passport" required>
+          </div>
+          <!-- Input for Phone Number -->
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="number" name="phone" placeholder="Enter your number" required>
+          </div>
+          <!-- Input for Password -->
+          <div class="input-box">
+            <span class="details">Upload Profile Image</span>
+            <input type="file" name="profile" required>
+          </div>
+          <!-- Input for Confirm Password -->
+          <div class="input-box">
+            <span class="details">ID or Passport Image Front</span>
+            <input type="file" name="passImage" placeholder="Confirm your password" required accept="image">
+          </div>
+        </div>
+        <div class="gender-details">
+          <!-- Radio buttons for gender selection -->
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <!-- Label for Male -->
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <!-- Label for Female -->
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <!-- Label for Prefer not to say -->
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <!-- Login button -->
+        <div class="button">
+          <input type="submit" value="Finish">
+        </div>
+
+        <div class="button">
+            <a href="#" class="text-center">GoBack</a>
+        </div>
+
+        <div class="button skip-btn">
+          <a href="{% url 'investor_profile' id=request.user.id%}" class="text-center btn btn-danger">Skip</a>
+      </div>
+      </form>
+    </div>
+  </div>
+<!--Template Javascript-->
+<script src="{% static 'js/index.js'%}"></script>
+</body>
+{% endblock %}
+</html>
