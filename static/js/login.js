@@ -29,5 +29,40 @@ closeButton.addEventListener('click', function() {
 
 
 
-//show dropmenus
+//show Passwords on forms
 
+const paswd = document.getElementById("password");
+const checkButton = document.getElementById("check")
+
+checkButton.addEventListener('click', function(){
+    if(checkButton.checked){
+        paswd.type="text"
+    }
+    else{
+        paswd.type="password"
+    }
+})
+
+
+const myPass = document.getElementById("mypassword");
+const checkBtn = document.getElementById("mycheck")
+checkBtn.addEventListener('click', function(){
+    if(checkBtn.checked){
+        myPass.type="text"
+    }
+    else{
+        myPass.type="password"
+    }
+})
+
+
+let password = document.getElementById("mypassword2");
+let checkbox = document.getElementById("mycheck");
+
+checkbox.onclick = function(){
+    if (checkbox.checked) {
+        password.type = "text";
+    }else{
+        password.type = "password";
+    }
+}

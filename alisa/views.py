@@ -99,7 +99,7 @@ def view_cart(request):
         else:
             messages.error(request, f'InvalidCode!!')
             return redirect('view_cart')
-    return render(request, 'cart.html', {'cart_items':cart_items, 'total_price':total_price,'grand_total':shipping_total})
+    return render(request, 'new-cart.html', {'cart_items':cart_items, 'total_price':total_price,'grand_total':shipping_total})
 
 #Adding Items To Your Shopping Cart
 @login_required(login_url='login_user')
